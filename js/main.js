@@ -4,6 +4,13 @@ var screenFillingVertexPositionBuffer;
 var screenFillingTextureCoordBuffer;
 var screenFillingIndexBuffer;
 
+var downsampleCoefficient = 2.0;
+
+var backBuffer;
+var textureBackBuffer;
+var backBufferHalf;
+var textureBackBufferHalf;
+
 function initGL(canvas) {
     try {
         gl = canvas.getContext("experimental-webgl");
@@ -21,16 +28,20 @@ function tick() {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    renderScrFillTexture();
+    draw2DBokehEffect();
 }
 
 function webGLStart() {
     var canvas = document.getElementById("3D_scene-canvas");
     initGL(canvas);
 
+    createFramebuffers();
+
     initSceneTexture();
 
     initShadersScreenFillingTexturePass();
+    initShadersScenePass();
+    initShadersDownsamplePass();
 
     initScreenFillingBuffers();
 
