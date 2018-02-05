@@ -5,7 +5,10 @@
         <script type="text/javascript" src="js/webgl-utils.js"></script>
 	    <script type="text/javascript" src="js/gl-matrix-test.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-    
+        <script type="text/javascript" src="js/texture.js"></script>
+        <script type="text/javascript" src="js/ShaderUtils.js"></script>
+        <script type="text/javascript" src="js/Geometries.js"></script>
+        <script type="text/javascript" src="js/Renderer.js"></script>
 
         <script id="screenFillingTexture-fs" type="x-shader/x-fragment">
             precision mediump float;
@@ -14,6 +17,7 @@
             varying vec2 vUv;
 
             void main(void) {
+                //gl_FragColor = vec4(vUv, 0.0, 1.0); return;
                 gl_FragColor = texture2D(uSampler, vUv);
             }
         </script>
@@ -33,7 +37,7 @@
     
     <body onload="webGLStart();">
         <div class="container">
-            <canvas id="3D_scene-canvas" style="border: none;" width="640" height="480"></canvas>
+            <canvas id="3D_scene-canvas" style="border: none;" width="780" height="577"></canvas>
         </div>
     </body>
 </html>

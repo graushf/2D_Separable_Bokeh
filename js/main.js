@@ -1,5 +1,9 @@
 var gl;
 
+var screenFillingVertexPositionBuffer;
+var screenFillingTextureCoordBuffer;
+var screenFillingIndexBuffer;
+
 function initGL(canvas) {
     try {
         gl = canvas.getContext("experimental-webgl");
@@ -16,11 +20,19 @@ function tick() {
     requestAnimFrame(tick);
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+    renderScrFillTexture();
 }
 
 function webGLStart() {
     var canvas = document.getElementById("3D_scene-canvas");
     initGL(canvas);
+
+    initSceneTexture();
+
+    initShadersScreenFillingTexturePass();
+
+    initScreenFillingBuffers();
 
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     //gl.enable(gl.DEPTH_TEST);
