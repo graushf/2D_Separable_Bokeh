@@ -94,7 +94,7 @@ function initShadersDownsamplePass() {
 
 function initShadersVerticalBlurPass() {
     var fragmentShader = getShader(gl, "verticalBlurPass-fs");
-    var vertexShader = getShader(gl, "screenFillingTexture-vs");
+    var vertexShader = getShader(gl, "verticalBlurPass-vs");
 
     shaderProgramVerticalBlurPass = gl.createProgram();
     gl.attachShader(shaderProgramVerticalBlurPass, vertexShader);

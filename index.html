@@ -105,7 +105,7 @@
         <script id="verticalBlurPass-fs" type="x-shader/x-fragment">
             precision mediump float;
 
-            #define PI 3.1415926535897932384626433832795
+            #define PI 3.14159265322
             #define NUM_SAMPLES 16
 
             uniform sampler2D uSampler;
@@ -119,16 +119,25 @@
             vec4 BlurTexture(sampler2D tex, vec2 uv, vec2 direction);
 
             void main(void) {
-                //gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); return;
+                gl_FragColor = vec4(vUv, 0.0, 1.0); return;
+
                 // Get the centre to determine the radius of the blur
                 vec4 centerColor = texture2D(uSampler, vUv);
                 float CoC = centerColor.a;
+
+
+                if (uInvViewDimensions.x == (1.0/780.0)) {
+                    //gl_FragColor = vec4(0.0, 1.0, 0.0, 1.0); return;
+                }
+                if (uInvViewDimensions.y == (1.0/577.0)) {
+                    //gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0); return;
+                }
 
                 // Compute the blur direction. Here, vertical.
                 vec2 blurDirection = CoC * uInvViewDimensions * vec2(cos(uAngle - PI/2.0), sin(uAngle - PI/2.0));
 
                 vec4 color = BlurTexture(uSampler, vUv, blurDirection);
-
+                gl_FragColor = color;
                 gl_FragColor = vec4(color.xyz * CoC, CoC);
             }
 
@@ -151,6 +160,27 @@
                 return (finalColor / blurAmount);
             }
         </script>
+
+        <script id="verticalBlurPass-vs" type="x-shader/x-vertex">
+            attribute vec3 aVertexPosition;
+            attribute vec2 aTextureCoord;
+            //uniform vec2 uInvViewDimensions;
+            varying vec2 vUv;
+
+            void main(void) {
+                //vec2 halfPixelSize = 2.0 * uInvViewDimensions;
+                //vec4 position.xy = sign(aVertexPosition.xy);
+                //vec4 _position = position;
+                //position = vec4(position.xy, 0.0, 1.0);
+                //position.xy += vec2(-1.0, 1.0) * halfPixelSize;
+
+                //vUv = 0.5 * _position.xy + 0.5;
+                //gl_Position = position;
+
+                vUv = aTextureCoord;
+                gl_Position = vec4(aVertexPosition, 1.0);
+            }
+        </script> 
 
         <script id="diagonalBlurPass-fs" type="x-shader/x-fragment">
             precision mediump float;
@@ -227,7 +257,7 @@
                 vec4 centerColor = texture2D(uVerticalBlurTexture, vUv);
                 vec4 centerColor2 = texture2D(uDiagonalBlurTexture, vUv);
                 float coc = centerColor.a;
-                float coc2 = centerColor2.a;
+                float coc2 = centerColor.a;
 
 
                 // Compute the blur direction. Here, diagonal
@@ -238,7 +268,7 @@
                 vec4 color = BlurTexture(uVerticalBlurTexture, vUv, blurDirection) * coc;
                 vec4 color2 = BlurTexture(uDiagonalBlurTexture, vUv, blurDirection2) * coc2;
 
-                //gl_FragColor = vec4(color2.xyz/coc2, 1.0); return;
+                //gl_FragColor = vec4(centerColor.xyz, 1.0); return;
 
                 vec3 outputCol = (color.rgb + color2.rgb) * 0.5;
 

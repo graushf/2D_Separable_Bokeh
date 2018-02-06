@@ -27,7 +27,7 @@ function draw2DBokehEffect() {
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
-    renderScrFillTexture(textureRhombiBlurBuffer);
+    renderScrFillTexture(textureVerticalBlurBuffer);
 }
 
 function renderScrFillTexture(texture) {
@@ -103,8 +103,8 @@ function renderDownsamplePass() {
     gl.bindBuffer(gl.ARRAY_BUFFER, screenFillingTextureCoordBuffer);
     gl.vertexAttribPointer(shaderProgramDownsamplePass.textureCoordAttribute, screenFillingTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-    var invViewDimensions_x = 1.0 / 789.0;
-    var invViewDimensions_y = 1.0 / 643.0;
+    //var invViewDimensions_x = 1.0 / 789.0;
+    //var invViewDimensions_y = 1.0 / 643.0;
 
     gl.uniform2f(shaderProgramDownsamplePass.invViewCoordinatesUniform, invViewDimensions_x, invViewDimensions_y);
 
@@ -137,8 +137,8 @@ function renderVerticalBlurPass() {
     gl.bindBuffer(gl.ARRAY_BUFFER, screenFillingTextureCoordBuffer);
     gl.vertexAttribPointer(shaderProgramVerticalBlurPass.textureCoordAttribute, screenFillingTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-    var invViewDimensions_x = 1.0 / 789.0;
-    var invViewDimensions_y = 1.0 / 643.0;
+    //var invViewDimensions_x = 1.0 / 789.0;
+    //var invViewDimensions_y = 1.0 / 643.0;
 
     gl.uniform2f(shaderProgramVerticalBlurPass.invViewCoordinatesUniform, invViewDimensions_x, invViewDimensions_y);
     gl.uniform1f(shaderProgramVerticalBlurPass.angleUniform, 0.0);
@@ -171,8 +171,8 @@ function renderDiagonalBlurPass() {
     gl.bindBuffer(gl.ARRAY_BUFFER, screenFillingTextureCoordBuffer);
     gl.vertexAttribPointer(shaderProgramDiagonalBlurPass.textureCoordAttribute, screenFillingTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-    var invViewDimensions_x = 1.0 / 789.0;
-    var invViewDimensions_y = 1.0 / 643.0;
+    //var invViewDimensions_x = 1.0 / 789.0;
+    //var invViewDimensions_y = 1.0 / 643.0;
 
     gl.uniform2f(shaderProgramDiagonalBlurPass.invViewCoordinatesUniform, invViewDimensions_x, invViewDimensions_y);
     gl.uniform1f(shaderProgramDiagonalBlurPass.angleUniform, 0.0);
@@ -209,8 +209,8 @@ function renderRhombiBlurPass() {
     gl.bindBuffer(gl.ARRAY_BUFFER, screenFillingTextureCoordBuffer);
     gl.vertexAttribPointer(shaderProgramRhombiBlurPass.textureCoordAttribute, screenFillingTextureCoordBuffer.itemSize, gl.FLOAT, false, 0, 0);
 
-    var invViewDimensions_x = 1.0 / 789.0;
-    var invViewDimensions_y = 1.0 / 643.0;
+    //var invViewDimensions_x = 1.0 / 789.0;
+    //var invViewDimensions_y = 1.0 / 643.0;
 
     gl.uniform2f(shaderProgramRhombiBlurPass.invViewCoordinatesUniform, invViewDimensions_x, invViewDimensions_y);
     gl.uniform1f(shaderProgramRhombiBlurPass.angleUniform, 0.0);
