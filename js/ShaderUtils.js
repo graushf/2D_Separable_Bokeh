@@ -37,6 +37,13 @@ function getShader(gl, id) {
 	return shader;
 }
 
+function setupShaders2DSeparableBokeh() {
+    initShadersScreenFillingTexturePass();
+    initShadersScenePass();
+    initShadersDownsamplePass();
+    initShadersVerticalBlurPass();
+}
+
 function initShadersScreenFillingTexturePass() {
     var fragmentShader = getShader(gl, "screenFillingTexture-fs");
     var vertexShader = getShader(gl, "screenFillingTexture-vs");
@@ -76,6 +83,20 @@ function initShadersDownsamplePass() {
     gl.linkProgram(shaderProgramDownsamplePass);
 
     if (!gl.getProgramParameter(shaderProgramDownsamplePass, gl.LINK_STATUS)) {
+        alert("Could not initialise shaders");
+    }
+}
+
+function initShadersVerticalBlurPass() {
+    var fragmentShader = getShader(gl, "verticalBlurPass-fs");
+    var vertexShader = getShader(gl, "screenFillingTexture-vs");
+
+    shaderProgramVerticalBlurPass = gl.createProgram();
+    gl.attachShader(shaderProgramVerticalBlurPass, vertexShader);
+    gl.attachShader(shaderProgramVerticalBlurPass, fragmentShader);
+    gl.linkProgram(shaderProgramVerticalBlurPass);
+
+    if (!gl.getProgramParameter(shaderProgramVerticalBlurPass, gl.LINK_STATUS)) {
         alert("Could not initialise shaders");
     }
 }

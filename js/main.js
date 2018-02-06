@@ -10,6 +10,8 @@ var backBuffer;
 var textureBackBuffer;
 var backBufferHalf;
 var textureBackBufferHalf;
+var verticalBlurBuffer;
+var textureVerticalBlurBuffer;
 
 function initGL(canvas) {
     try {
@@ -39,9 +41,7 @@ function webGLStart() {
 
     initSceneTexture();
 
-    initShadersScreenFillingTexturePass();
-    initShadersScenePass();
-    initShadersDownsamplePass();
+    setupShaders2DSeparableBokeh();
 
     initScreenFillingBuffers();
 
