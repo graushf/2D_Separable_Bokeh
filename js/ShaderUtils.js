@@ -1,6 +1,8 @@
 var shaderProgramScrFillTexturePass;
 var shaderProgramScenePass;
 var shaderProgramDownsamplePass;
+var shaderProgramVerticalBlurPass;
+var shaderProgramDiagonalBlurPass;
 
 function getShader(gl, id) {
 	var shaderScript = document.getElementById(id);
@@ -42,6 +44,7 @@ function setupShaders2DSeparableBokeh() {
     initShadersScenePass();
     initShadersDownsamplePass();
     initShadersVerticalBlurPass();
+    initShadersDiagonalBlurPass();
 }
 
 function initShadersScreenFillingTexturePass() {
@@ -98,5 +101,19 @@ function initShadersVerticalBlurPass() {
 
     if (!gl.getProgramParameter(shaderProgramVerticalBlurPass, gl.LINK_STATUS)) {
         alert("Could not initialise shaders");
+    }
+}
+
+function initShadersDiagonalBlurPass() {
+    var fragmentShader = getShader(gl, "diagonalBlurPass-fs") ;
+    var vertexShader = getShader(gl, "screenFillingTexture-vs");
+
+    shaderProgramDiagonalBlurPass = gl.createProgram();
+    gl.attachShader(shaderProgramDiagonalBlurPass, vertexShader);
+    gl.attachShader(shaderProgramDiagonalBlurPass, fragmentShader);
+    gl.linkProgram(shaderProgramDiagonalBlurPass);
+
+    if (!gl.getProgramParameter(shaderProgramDiagonalBlurPass, gl.LINK_STATUS)) {
+        alert("Could not inialise shaders");
     }
 }
