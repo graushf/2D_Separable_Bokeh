@@ -14,6 +14,8 @@ var verticalBlurBuffer;
 var textureVerticalBlurBuffer;
 var diagonalBlurBuffer;
 var textureDiagonalBlurBuffer;
+var rhombiBlurBuffer;
+var textureRhombiBlurBuffer;
 
 function initGL(canvas) {
     try {
