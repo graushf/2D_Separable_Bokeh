@@ -22,6 +22,9 @@ var invViewDimensions_y;
 var CoC = 1.0;
 var Angle = 0.0;
 
+var ext3;
+var MRTfbData;
+
 window.onload = window.onresize = function() {
     var canvas = document.getElementById('WebGLCanvas');
     //canvas.width = window.innerWidth * 0.8;
@@ -51,13 +54,14 @@ function tick() {
 
     handleKeys();
     handleStatistics();
-    draw2DBokehEffect();
+    draw2DBokehEffectOptimized2Pass();
 }
 
 function webGLStart() {
     var canvas = document.getElementById("WebGLCanvas");
     initGL(canvas);
-    
+
+    setupMRT();
     createFramebuffers();
 
     initSceneTexture();
