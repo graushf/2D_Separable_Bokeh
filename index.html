@@ -2,6 +2,8 @@
     <head>
         <title>2D Separable Bokeh</title>
         <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+        
+        <link rel="stylesheet" href="css/styles.css" type="text/css">
         <script type="text/javascript" src="js/webgl-utils.js"></script>
 	    <script type="text/javascript" src="js/gl-matrix-test.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
@@ -10,6 +12,9 @@
         <script type="text/javascript" src="js/Geometries.js"></script>
         <script type="text/javascript" src="js/Renderer.js"></script>
         <script type="text/javascript" src="js/Framebuffers.js"></script>
+        <script type="text/javascript" src="js/Eventhandler.js"></script>
+        <script type="text/javascript" src="js/StatsInformation.js"></script>
+
 
         <script id="screenFillingTexture-fs" type="x-shader/x-fragment">
             precision mediump float;
@@ -298,7 +303,11 @@
     
     <body onload="webGLStart();">
         <div class="container">
-            <canvas id="3D_scene-canvas" style="border: none;" width="780" height="577"></canvas>
+            <canvas id="WebGLCanvas" style="border: none;" width="780" height="577">No canvas support</canvas>
+            <div id="overlay">
+                <div>CoC (Q/A): <span id="CoCId"></span></div>
+                <div>Angle (W/S): <span id="AngleId"></span></div>
+            </div>
         </div>
     </body>
 </html>

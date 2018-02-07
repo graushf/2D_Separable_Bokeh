@@ -19,6 +19,15 @@ var textureRhombiBlurBuffer;
 var invViewDimensions_x;
 var invViewDimensions_y;
 
+var CoC = 1.0;
+var Angle = 0.0;
+
+window.onload = window.onresize = function() {
+    var canvas = document.getElementById('WebGLCanvas');
+    //canvas.width = window.innerWidth * 0.8;
+    //canvas.height = window.innerHeight * 0.2;
+}
+
 function initGL(canvas) {
     try {
         gl = canvas.getContext("experimental-webgl");
@@ -40,11 +49,13 @@ function tick() {
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
+    handleKeys();
+    handleStatistics();
     draw2DBokehEffect();
 }
 
 function webGLStart() {
-    var canvas = document.getElementById("3D_scene-canvas");
+    var canvas = document.getElementById("WebGLCanvas");
     initGL(canvas);
     
     createFramebuffers();
@@ -59,9 +70,10 @@ function webGLStart() {
     //gl.enable(gl.DEPTH_TEST);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    //document.onkeydown = handleKeyDown;
-    //document.onkeyup = handleKeyUp;
-    //document.onmousemove = handleMouseMove;
+    document.onkeydown = handleKeyDown;
+    document.onkeyup = handleKeyUp;
+
+    initStatistics();
     
     tick();
 }
