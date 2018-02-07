@@ -11,6 +11,6 @@ Reduced Bokeh size:
 
 ![Screenshot1](docs/images/output2.png)
 
-Angled sligtly changed:
+Bokeh angle slightly changed:
 
 ![Screenshot1](docs/images/output3.jpg)
