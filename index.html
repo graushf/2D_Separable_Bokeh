@@ -119,8 +119,7 @@
             vec4 BlurTexture(sampler2D tex, vec2 uv, vec2 direction);
 
             void main(void) {
-                gl_FragColor = vec4(vUv, 0.0, 1.0); return;
-
+                //gl_FragColor = vec4(vUv, 0.0, 1.0); return;
                 // Get the centre to determine the radius of the blur
                 vec4 centerColor = texture2D(uSampler, vUv);
                 float CoC = centerColor.a;

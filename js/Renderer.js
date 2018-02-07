@@ -27,7 +27,7 @@ function draw2DBokehEffect() {
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
-    renderScrFillTexture(textureVerticalBlurBuffer);
+    renderScrFillTexture(textureRhombiBlurBuffer);
 }
 
 function renderScrFillTexture(texture) {
